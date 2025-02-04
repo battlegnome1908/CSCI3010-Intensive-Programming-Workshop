@@ -18,21 +18,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # Step 2: Install GCC, make, and any other dependencies
-    - name: Install GCC, make, and Catch2 (if needed)
+    # Step 2: Install GCC and make
+    - name: Install GCC and make
       run: |
         sudo apt-get update
-        sudo apt-get install -y g++ make libcatch2-dev  # Install GCC, make, and Catch2
+        sudo apt-get install -y g++ make  # Only install GCC and make, no need for Catch2
 
     # Step 3: Build the project and run tests
     - name: Build and run tests
       run: |
+        make clean  # Clean previous builds
         make all  # Build the project (including the main program)
         make run_tests  # Run the tests
-
-    # Optional: Save test results (if you want to persist logs or outputs)
-    # - name: Upload test results
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: test-results
-    #     path: ./test-results.log
