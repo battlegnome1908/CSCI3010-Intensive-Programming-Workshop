@@ -31,7 +31,7 @@ jobs:
     # Step 4: Set up the build and run tests
     - name: Build and run tests
       run: |
-        make all  # Build the project
+        make test  # Build the project
         make run_tests  # Run the tests
 
     # Step 5: Save test results (optional, if you want to persist test output)
