@@ -18,7 +18,7 @@ TEST_CASE("EvenMask correctly identifies even and odd numbers", "[EvenMask]") {
     SECTION("Test with all even numbers") {
         std::vector<int> input = {2, 4, 6, 8};
         std::vector<bool> expected = {true, true, true, true};
-        REQUIRE(EvenMask(input) == expected);
+        REQUIRE(EvenMask(input) == expected); 
     }
 
     SECTION("Test with all odd numbers") {
