@@ -18,17 +18,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # Step 2: Set up C++ environment (install necessary tools)
-    - name: Set up C++ environment
-      uses: actions/setup-cpp@v1
-      with:
-        compiler: 'gcc'  # or 'clang' if preferred
+    # Step 2: Install GCC, make, and any other dependencies
+    - name: Install GCC, make, and Catch2 (if needed)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++ make libcatch2-dev  # Install GCC, make, and Catch2
 
-    # Step 3: Install dependencies (optional)
-    - name: Install Catch2 (if not header-only)
-      run: sudo apt-get install libcatch2-dev  # Install Catch2 if required (not needed if header-only)
-
-    # Step 4: Build the project and run tests
+    # Step 3: Build the project and run tests
     - name: Build and run tests
       run: |
         make all  # Build the project (including the main program)
