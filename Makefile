@@ -1,8 +1,3 @@
-# This is a make file with three targets:
-#  1. "make all" - compiles main
-#  2. "make clean" - removes .o files
-#  3. "./main" - runs the program
-
 # Compiler and flags
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Werror -Wpedantic
@@ -26,13 +21,13 @@ main.o: main.cpp
 functions_to_implement.o: functions_to_implement.cpp
 	$(CXX) $(CXXFLAGS) -c functions_to_implement.cpp
 
-# Build the test program
+# Build the test program (this target will build the test executable)
 test: test.o functions_to_implement.o
-	$(CXX) $(CXXFLAGS) -Iinclude test.o functions_to_implement.o -o test
+	$(CXX) $(CXXFLAGS) -o test test.o functions_to_implement.o  # Linking both object files
 
 # Compile test.o from test.cpp
 test.o: test.cpp
-	$(CXX) $(CXXFLAGS) -Iinclude -c test.cpp
+	$(CXX) $(CXXFLAGS) -c test.cpp  # Compile test.cpp to test.o
 
 # Run the test program
 run_tests: test
