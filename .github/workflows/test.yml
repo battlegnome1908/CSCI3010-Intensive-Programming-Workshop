@@ -18,21 +18,25 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # Step 2: Set up GCC (G++) for C++ compilation
-    - name: Set up GCC
-      run: sudo apt-get install g++ make
+    # Step 2: Set up C++ environment (install necessary tools)
+    - name: Set up C++ environment
+      uses: actions/setup-cpp@v1
+      with:
+        compiler: 'gcc'  # or 'clang' if preferred
 
-    # Step 3: Install dependencies (if any, such as Catch2 if not header-only)
-    # If you need Catch2 installed, you can add that here
-    # For example, to install Catch2 via apt:
-    # - name: Install Catch2
-    #   run: sudo apt-get install libcatch2-dev
+    # Step 3: Install dependencies (optional)
+    - name: Install Catch2 (if not header-only)
+      run: sudo apt-get install libcatch2-dev  # Install Catch2 if required (not needed if header-only)
 
-    # Step 4: Set up the build and run tests
+    # Step 4: Build the project and run tests
     - name: Build and run tests
       run: |
-        make test  # Build the project
+        make all  # Build the project (including the main program)
         make run_tests  # Run the tests
 
-    # Step 5: Save test results (optional, if you want to persist test output)
-    # You could use GitHub Actions artifacts or logs for test outp
+    # Optional: Save test results (if you want to persist logs or outputs)
+    # - name: Upload test results
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: test-results
+    #     path: ./test-results.log
